@@ -57,5 +57,7 @@
 
       (check-minus "minus(-(minus(5),9))" 14)
 
+      (check-nested-minus "let x = minus(-(minus(5),9)) in zero? (x)" #f)
+
       ))
   )
