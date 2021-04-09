@@ -36,33 +36,33 @@
 
         ;\commentbox{\diffspec}
         (diff-exp (exp1 exp2)
-          (let ((val1 (value-of exp1 env))
-                (val2 (value-of exp2 env)))
-            (let ((num1 (expval->num val1))
-                  (num2 (expval->num val2)))
-              (num-val
-                (- num1 num2)))))
+                  (let ((val1 (value-of exp1 env))
+                        (val2 (value-of exp2 env)))
+                    (let ((num1 (expval->num val1))
+                          (num2 (expval->num val2)))
+                      (num-val
+                       (- num1 num2)))))
 
         ;\commentbox{\zerotestspec}
         (zero?-exp (exp1)
-          (let ((val1 (value-of exp1 env)))
-            (let ((num1 (expval->num val1)))
-              (if (zero? num1)
-                (bool-val #t)
-                (bool-val #f)))))
+                   (let ((val1 (value-of exp1 env)))
+                     (let ((num1 (expval->num val1)))
+                       (if (zero? num1)
+                           (bool-val #t)
+                           (bool-val #f)))))
               
         ;\commentbox{\ma{\theifspec}}
         (if-exp (exp1 exp2 exp3)
-          (let ((val1 (value-of exp1 env)))
-            (if (expval->bool val1)
-              (value-of exp2 env)
-              (value-of exp3 env))))
+                (let ((val1 (value-of exp1 env)))
+                  (if (expval->bool val1)
+                      (value-of exp2 env)
+                      (value-of exp3 env))))
 
         ;\commentbox{\ma{\theletspecsplit}}
         (let-exp (var exp1 body)       
-          (let ((val1 (value-of exp1 env)))
-            (value-of body
-              (extend-env var val1 env))))
+                 (let ((val1 (value-of exp1 env)))
+                   (value-of body
+                             (extend-env var val1 env))))
 
         (minus-exp (exp1)
                    (let ((val (value-of exp1 env)))
@@ -70,6 +70,15 @@
                      ; and that caused quite the issues
                      ; I'll have to remember doing this.
                      (num-val (- (expval->num val)))))
+
+        (addition-exp (term1 term2)
+                      (let ((first-val (value-of term1 env))
+                            (second-val (value-of term2 env)))
+                        (let ((first-number (expval->num first-val))
+                              (second-number (expval->num second-val)))
+                          (num-val
+                           (+ first-number second-number)))))
+                  
 
         )))
 

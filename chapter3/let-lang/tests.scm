@@ -56,8 +56,13 @@
       (check-shadowing-in-rhs "let x = 3 in let x = -(x,1) in x" 2)
 
       (check-minus "minus(-(minus(5),9))" 14)
-
       (check-nested-minus "let x = minus(-(minus(5),9)) in zero? (x)" #f)
 
+      (check-addition "plus(4,5)" 9)
+      (check-nested-addition "plus(plus(plus(1,2),5),plus(0,1))" 9)
+      (check-addition-pos-neg "plus(3,-3)" 0)
+
+
+      
       ))
   )

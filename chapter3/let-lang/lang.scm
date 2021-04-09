@@ -27,6 +27,7 @@
       (expression (identifier) var-exp)
       (expression ("let" identifier "=" expression "in" expression) let-exp)
       (expression ("minus" "(" expression ")") minus-exp)
+      (expression ("plus" "(" expression "," expression ")") addition-exp)
       ))
   
   ;;;;;;;;;;;;;;;; sllgen boilerplate ;;;;;;;;;;;;;;;;
