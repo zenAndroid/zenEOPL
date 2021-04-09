@@ -26,14 +26,28 @@
       (expression ("if" expression "then" expression "else" expression) if-exp)
       (expression (identifier) var-exp)
       (expression ("let" identifier "=" expression "in" expression) let-exp)
+
+      ;; My additions
+
+      ;; Arithmetic
       (expression ("minus" "(" expression ")") minus-exp)
       (expression ("plus" "(" expression "," expression ")") addition-exp)
       (expression ("mult" "(" expression "," expression ")") mult-exp)
       (expression ("div" "(" expression "," expression ")") quotient-exp)
 
+      ;; Predicates ...
       (expression ("equal?" "(" expression "," expression ")") num-equality-test)
       (expression ("greater?" "(" expression "," expression ")") num-gt-test)
       (expression ("less?" "(" expression "," expression ")") num-lt-test)
+
+      ;; List processing operations ...
+
+      (expression ("cons" "(" expression "," expression ")") cons-exp)
+      (expression ("car" "(" expression ")") car-exp)
+      (expression ("cdr" "(" expression ")") cdr-exp)
+      (expression ("emptylist") empty-list-exp)
+      (expression ("null?" "(" expression ")") null-list-check)
+      
       ))
   
   ;;;;;;;;;;;;;;;; sllgen boilerplate ;;;;;;;;;;;;;;;;

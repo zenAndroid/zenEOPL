@@ -105,21 +105,41 @@
                                 (equal? first-number second-number)))))
 
         (num-gt-test (term1 term2)
-                           (let ((first-val (value-of term1 env))
-                                 (second-val (value-of term2 env)))
-                             (let ((first-number (expval->num first-val))
-                                   (second-number (expval->num second-val)))
-                               (bool-val
-                                (> first-number second-number)))))
+                     (let ((first-val (value-of term1 env))
+                           (second-val (value-of term2 env)))
+                       (let ((first-number (expval->num first-val))
+                             (second-number (expval->num second-val)))
+                         (bool-val
+                          (> first-number second-number)))))
 
         (num-lt-test (term1 term2)
-                           (let ((first-val (value-of term1 env))
-                                 (second-val (value-of term2 env)))
-                             (let ((first-number (expval->num first-val))
-                                   (second-number (expval->num second-val)))
-                               (bool-val
-                                (< first-number second-number)))))
+                     (let ((first-val (value-of term1 env))
+                           (second-val (value-of term2 env)))
+                       (let ((first-number (expval->num first-val))
+                             (second-number (expval->num second-val)))
+                         (bool-val
+                          (< first-number second-number)))))
 
+        (cons-exp (head tail)
+                  (let ((head-val (value-of head env))
+                        (tail-val (value-of tail env)))
+                    (pair-val head-val tail-val)))
+
+        (car-exp (list-exp)
+                  (let ((list-val (value-of list-exp env)))
+                    (expval->pair-car list-val)))
+
+        (cdr-exp (list-exp)
+                  (let ((list-val (value-of list-exp env)))
+                    (expval->pair-cdr list-val)))
+
+        (null-list-check (expr)
+                         (let ((val (value-of expr env)))
+                           (bool-val
+                            (equal? val (empty-list-val)))))
+                                      
+        (empty-list-exp ()
+                        (empty-list-val))
 
         )))
 

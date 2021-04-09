@@ -4,42 +4,59 @@
 
   (provide (all-defined-out))               ; too many things to list
 
-;;;;;;;;;;;;;;;; expressed values ;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;; expressed values ;;;;;;;;;;;;;;;;
 
-;;; an expressed value is either a number, a boolean or a procval.
-
+  ;;; an expressed value is either a number, a boolean or a procval.
+  ;;; In addition, i will now add a pair as a basic expval.
+  
   (define-datatype expval expval?
     (num-val
-      (value number?))
+     (value number?))
     (bool-val
-      (boolean boolean?)))
+     (boolean boolean?))
+    (empty-list-val)
+    (pair-val
+     (head expval?)
+     (tail expval?)))
 
-;;; extractors:
+  ;;; extractors:
 
   ;; expval->num : ExpVal -> Int
   ;; Page: 70
   (define expval->num
     (lambda (v)
       (cases expval v
-	(num-val (num) num)
-	(else (expval-extractor-error 'num v)))))
+        (num-val (num) num)
+        (else (expval-extractor-error 'num v)))))
 
   ;; expval->bool : ExpVal -> Bool
   ;; Page: 70
   (define expval->bool
     (lambda (v)
       (cases expval v
-	(bool-val (bool) bool)
-	(else (expval-extractor-error 'bool v)))))
+        (bool-val (bool) bool)
+        (else (expval-extractor-error 'bool v)))))
+
+  (define expval->pair-car
+    (lambda (v)
+      (cases expval v
+        (pair-val (head tail) head)
+        (else (expval-extractor-error 'pair-car v)))))
+
+  (define expval->pair-cdr
+    (lambda (v)
+      (cases expval v
+        (pair-val (head tail) tail)
+        (else (expval-extractor-error 'pair-cdr v)))))
 
   (define expval-extractor-error
     (lambda (variant value)
       (eopl:error 'expval-extractors "Looking for a ~s, found ~s"
-	variant value)))
+                  variant value)))
 
-;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
 
-;; example of a data type built without define-datatype
+  ;; example of a data type built without define-datatype
 
   (define empty-env-record
     (lambda () 
@@ -71,4 +88,4 @@
     (lambda (r)
       (cdr r)))
 
-)
+  )

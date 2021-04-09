@@ -67,8 +67,37 @@
            => (lambda (test)
                 (run (cadr test))))
           (else (eopl:error 'run-one "no such test: ~s" test-name))))))
- 
-  (run-all)
+
+
+  ;; (run-all)
+
+  
+  (display (run "x")) (newline)
+  (display (run "v")) (newline)
+  (display (run "i"))(newline)
+  (display (run "10"))(newline)
+  (display (run "-(1, 2)"))(newline)
+  (display (run "-(1, x)"))(newline)
+
+  ;; (run "foo") -> error
+
+  (display (run "if zero?(-(11, 11)) then 3 else 4"))(newline)
+
+  (display (run "minus(4)"))(newline)
+
+  (display (run "if zero?(-(11, 11)) then minus(3) else minus(4)"))
+
+  (newline)
+
+  (display (run "car(cons(cons(5,6),6))"))
+
+  (newline)
+
+  (display (run "cons(5,cons(6,cons(7,emptylist)))"))
+
+  (newline)
+
+  (display (run "null?(emptylist)"))
   
   )
 
