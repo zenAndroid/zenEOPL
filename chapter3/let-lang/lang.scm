@@ -25,7 +25,8 @@
       (expression ("zero?" "(" expression ")") zero?-exp)
       (expression ("if" expression "then" expression "else" expression) if-exp)
       (expression (identifier) var-exp)
-      (expression ("let" identifier "=" expression "in" expression) let-exp)   
+      (expression ("let" identifier "=" expression "in" expression) let-exp)
+      (expression ("minus" "(" expression ")") minus-exp)
       ))
   
   ;;;;;;;;;;;;;;;; sllgen boilerplate ;;;;;;;;;;;;;;;;

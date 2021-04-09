@@ -55,5 +55,7 @@
       (check-shadowing-in-body "let x = 3 in let x = 4 in x" 4)
       (check-shadowing-in-rhs "let x = 3 in let x = -(x,1) in x" 2)
 
+      (check-minus "minus(-(minus(5),9))" 14)
+
       ))
   )

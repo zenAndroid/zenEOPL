@@ -64,6 +64,13 @@
             (value-of body
               (extend-env var val1 env))))
 
+        (minus-exp (exp1)
+                   (let ((val (value-of exp1 env)))
+                     ; Huh, at first I didn't have the num-val there
+                     ; and that caused quite the issues
+                     ; I'll have to remember doing this.
+                     (num-val (- (expval->num val)))))
+
         )))
 
 
