@@ -78,7 +78,48 @@
                               (second-number (expval->num second-val)))
                           (num-val
                            (+ first-number second-number)))))
-                  
+
+        (mult-exp (term1 term2)
+                  (let ((first-val (value-of term1 env))
+                        (second-val (value-of term2 env)))
+                    (let ((first-number (expval->num first-val))
+                          (second-number (expval->num second-val)))
+                      (num-val
+                       (* first-number second-number)))))
+
+        (quotient-exp (term1 term2)
+                      (let ((first-val (value-of term1 env))
+                            (second-val (value-of term2 env)))
+                        (let ((first-number (expval->num first-val))
+                              (second-number (expval->num second-val)))
+                          (num-val
+                           (/ first-number second-number)))))
+
+
+        (num-equality-test (term1 term2)
+                           (let ((first-val (value-of term1 env))
+                                 (second-val (value-of term2 env)))
+                             (let ((first-number (expval->num first-val))
+                                   (second-number (expval->num second-val)))
+                               (bool-val
+                                (equal? first-number second-number)))))
+
+        (num-gt-test (term1 term2)
+                           (let ((first-val (value-of term1 env))
+                                 (second-val (value-of term2 env)))
+                             (let ((first-number (expval->num first-val))
+                                   (second-number (expval->num second-val)))
+                               (bool-val
+                                (> first-number second-number)))))
+
+        (num-lt-test (term1 term2)
+                           (let ((first-val (value-of term1 env))
+                                 (second-val (value-of term2 env)))
+                             (let ((first-number (expval->num first-val))
+                                   (second-number (expval->num second-val)))
+                               (bool-val
+                                (< first-number second-number)))))
+
 
         )))
 

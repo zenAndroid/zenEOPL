@@ -62,6 +62,13 @@
       (check-nested-addition "plus(plus(plus(1,2),5),plus(0,1))" 9)
       (check-addition-pos-neg "plus(3,-3)" 0)
 
+      (check-multiplication "mult(4,5)" 20)
+
+      (check-division "div(20,5)" 4)
+
+      (check-numerical-equality "equal?(7,7)" #t)
+      (check-numerical-equality "equal?(plus(1,6),7)" #t)
+
 
       
       ))

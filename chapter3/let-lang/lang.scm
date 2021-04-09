@@ -28,6 +28,12 @@
       (expression ("let" identifier "=" expression "in" expression) let-exp)
       (expression ("minus" "(" expression ")") minus-exp)
       (expression ("plus" "(" expression "," expression ")") addition-exp)
+      (expression ("mult" "(" expression "," expression ")") mult-exp)
+      (expression ("div" "(" expression "," expression ")") quotient-exp)
+
+      (expression ("equal?" "(" expression "," expression ")") num-equality-test)
+      (expression ("greater?" "(" expression "," expression ")") num-gt-test)
+      (expression ("less?" "(" expression "," expression ")") num-lt-test)
       ))
   
   ;;;;;;;;;;;;;;;; sllgen boilerplate ;;;;;;;;;;;;;;;;
