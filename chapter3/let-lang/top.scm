@@ -71,6 +71,7 @@
 
   ;; (run-all)
 
+  (newline)(display "=== Environment operations: ===") (newline)(newline)
   
   (display (run "x")) (newline)
   (display (run "v")) (newline)
@@ -80,12 +81,15 @@
   (display (run "-(1, x)"))(newline)
 
   ;; (run "foo") -> error
+  (newline)(display "=== If evaluation order test operations: ===") (newline)(newline)
 
   (display (run "if zero?(-(11, 11)) then 3 else 4"))(newline)
 
   (display (run "minus(4)"))(newline)
 
   (display (run "if zero?(-(11, 11)) then minus(3) else minus(4)")) (newline)
+
+  (newline)(display "=== List operations: ===") (newline)(newline)
 
   (display (run "car(cons(cons(5,6),6))")) (newline)
 
@@ -103,7 +107,14 @@
   ;; first time ????
   ;; ????
   ;; I am going to sleep.
-  
+
+  (newline)(display "Printing operations:") (newline)(newline)
+
+  (run "print(3)")
+
+  (run "print(cons(1,2))")
+
+  (run "print(list(1,2))")
   
   )
 

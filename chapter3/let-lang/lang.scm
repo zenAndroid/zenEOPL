@@ -59,6 +59,10 @@
       ;; Cond-exps
 
       (expression ("cond" (arbno expression "==>" expression) "end") cond-exp)
+
+      ;; Print operation
+
+      (expression ("print" "(" expression ")") print-exp)
       
       ))
   

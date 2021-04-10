@@ -160,6 +160,14 @@
         (cond-exp (expressions-to-eval corresponding-consequents)
                   (cond-value expressions-to-eval corresponding-consequents value-of env))
 
+        ;; Print op
+
+        (print-exp (expr)
+                   (let ((to-print (value-of expr env)))
+                     (display to-print)
+                     (newline)
+                     (num-val 1)))
+
         )))
 
 
