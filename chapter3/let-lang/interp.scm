@@ -148,6 +148,14 @@
                                       (value-of expression env))
                                     arg-exps)))
 
+
+        ;; Cond-exp, noot really certain what and how i am going to catch
+        ;; all the elements but it should be doable ...
+
+        ;; Going with overly detailed names, because why not.
+        (cond-exp (expressions-to-eval corresponding-consequents)
+                  (cond-value expressions-to-eval corresponding-consequents value-of env))
+
         )))
 
 

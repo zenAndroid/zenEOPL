@@ -55,6 +55,10 @@
       ;; Hope it works though.
 
       (expression ("list" "(" (separated-list expression ",") ")") list-op-exp)
+
+      ;; Cond-exps
+
+      (expression ("cond" (arbno expression "==>" expression) "end") cond-exp)
       
       ))
   
