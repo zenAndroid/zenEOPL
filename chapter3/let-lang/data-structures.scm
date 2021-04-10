@@ -54,6 +54,12 @@
       (eopl:error 'expval-extractors "Looking for a ~s, found ~s"
                   variant value)))
 
+  (define (list-val args)
+    (if (null? args)
+        (empty-list-val)
+        (pair-val (car args)
+                  (list-val (cdr args)))))
+
   ;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
 
   ;; example of a data type built without define-datatype

@@ -47,6 +47,14 @@
       (expression ("cdr" "(" expression ")") cdr-exp)
       (expression ("emptylist") empty-list-exp)
       (expression ("null?" "(" expression ")") null-list-check)
+
+      ;; Actual list operator
+
+      ;; Got the (separated-list ...) from their description of SLLGEN,
+      ;; They never said you had to look for it, this is a thing i greatly dislike >:(
+      ;; Hope it works though.
+
+      (expression ("list" "(" (separated-list expression ",") ")") list-op-exp)
       
       ))
   

@@ -85,19 +85,17 @@
 
   (display (run "minus(4)"))(newline)
 
-  (display (run "if zero?(-(11, 11)) then minus(3) else minus(4)"))
+  (display (run "if zero?(-(11, 11)) then minus(3) else minus(4)")) (newline)
 
-  (newline)
+  (display (run "car(cons(cons(5,6),6))")) (newline)
 
-  (pretty-display (run "car(cons(cons(5,6),6))"))
+  (display (run "cons(5,cons(6,cons(7,emptylist)))")) (newline)
 
-  (newline)
+  (display (run "null?(emptylist)")) (newline)
 
-  (display (run "cons(5,cons(6,cons(7,emptylist)))"))
+  (display (run "list(1,2,let x = -(10,7) in plus(x,3))")) (newline)
 
-  (newline)
-
-  (display (run "null?(emptylist)"))
+  (display (run "car(list(1,2,let x = -(10,7) in plus(x,3)))")) (newline)
   
   )
 

@@ -103,7 +103,7 @@
                                    (second-number (expval->num second-val)))
                                (bool-val
                                 (equal? first-number second-number)))))
-        ; \alpha
+        
         (num-gt-test (term1 term2)
                      (let ((first-val (value-of term1 env))
                            (second-val (value-of term2 env)))
@@ -140,6 +140,13 @@
                                       
         (empty-list-exp ()
                         (empty-list-val))
+
+        ;; List
+
+        (list-op-exp (arg-exps)
+                     (list-val (map (lambda (expression)
+                                      (value-of expression env))
+                                    arg-exps)))
 
         )))
 
