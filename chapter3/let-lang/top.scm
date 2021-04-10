@@ -69,7 +69,7 @@
           (else (eopl:error 'run-one "no such test: ~s" test-name))))))
 
 
-  ;; (run-all)
+  (run-all)
 
   (newline)(display "=== Environment operations: ===") (newline)(newline)
   
@@ -107,14 +107,25 @@
   ;; first time ????
   ;; ????
   ;; I am going to sleep.
-
+  
+  (run "plus(plus(1,1),4)")
+  ; This doesn't print anything, i thought it was a bug
+  ; But i think it is intended since the other solutions do this AND
+  ; the evaluator dosent yet know how to handle raw values i assume
+  ; (like, if you give it a raw number, itll be fine, but if you feed it a #(struct:num-val 8) value
+  ; it doesnt have a case for how to handle with that, weird, hope that gets solved i guess
+  
   (newline)(display "Printing operations:") (newline)(newline)
 
   (run "print(3)")
-
+ 
   (run "print(cons(1,2))")
 
   (run "print(list(1,2))")
+
+  (run "plus(print(66),print(8))")
+
+  
   
   )
 

@@ -60,19 +60,6 @@
         (pair-val (car args)
                   (list-val (cdr args)))))
 
-  ;; I have no clue what i'm doing atm
-
-  (define (cond-value conds conseqs evaluator env) ; rip this solution is too hacky i dont think its the one intended
-    ; I will make the assumption that the two lists
-    ; have the same length, TODO: Is this something you want to keep?
-    (if (null? conds)
-        (eopl:error "Cond expression empty")
-        (let ((head-cond-exp (car conds))
-              (head-consequent-exp (car conseqs)))
-          (let ((head-val (evaluator head-cond-exp env)))
-            (if (expval->bool head-val)
-                (evaluator head-consequent-exp env)
-                (cond-value (cdr conds) (cdr conseqs) evaluator env))))))
 
   ;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
 

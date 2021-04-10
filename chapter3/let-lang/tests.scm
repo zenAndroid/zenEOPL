@@ -70,12 +70,6 @@
       (check-numerical-equality-nested "equal?(plus(1,6),7)" #t)
 
       (check-numerical-equality-nested "equal?(plus(1,6),5)" #f)
-
-
-      (check-cons "let x = 4 in cons(x,cons(cons(-(x,1),emptylist),emptylist))" (4 (3)))
-
-      (check-null "null?(emptylist)" #t)
-
       
       ))
   )

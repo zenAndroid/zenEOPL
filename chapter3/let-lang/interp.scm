@@ -64,7 +64,8 @@
                  (let ((val1 (value-of exp1 env)))
                    (value-of body
                              (extend-env var val1 env))))
-
+                 
+                 
         (minus-exp (exp1)
                    (let ((val (value-of exp1 env)))
                      ; Huh, at first I didn't have the num-val there
@@ -72,29 +73,26 @@
                      ; I'll have to remember doing this.
                      (num-val (- (expval->num val)))))
 
-        (addition-exp (term1 term2)
-                      (let ((first-val (value-of term1 env))
-                            (second-val (value-of term2 env)))
+        (addition-exp (term1-exp term2-exp)
+                      (let ((first-val (value-of term1-exp env))
+                            (second-val (value-of term2-exp env)))
                         (let ((first-number (expval->num first-val))
                               (second-number (expval->num second-val)))
-                          (num-val
-                           (+ first-number second-number)))))
+                          (num-val (+ first-number second-number)))))
 
         (mult-exp (term1 term2)
                   (let ((first-val (value-of term1 env))
                         (second-val (value-of term2 env)))
                     (let ((first-number (expval->num first-val))
                           (second-number (expval->num second-val)))
-                      (num-val
-                       (* first-number second-number)))))
+                      (num-val (* first-number second-number)))))
 
         (quotient-exp (term1 term2)
                       (let ((first-val (value-of term1 env))
                             (second-val (value-of term2 env)))
                         (let ((first-number (expval->num first-val))
                               (second-number (expval->num second-val)))
-                          (num-val
-                           (/ first-number second-number)))))
+                          (num-val (/ first-number second-number)))))
 
 
         (num-equality-test (term1 term2)
@@ -102,8 +100,7 @@
                                  (second-val (value-of term2 env)))
                              (let ((first-number (expval->num first-val))
                                    (second-number (expval->num second-val)))
-                               (bool-val
-                                (equal? first-number second-number)))))
+                               (bool-val (equal? first-number second-number)))))
         
         
         (num-gt-test (term1 term2)
@@ -111,8 +108,7 @@
                            (second-val (value-of term2 env)))
                        (let ((first-number (expval->num first-val))
                              (second-number (expval->num second-val)))
-                         (bool-val
-                          (> first-number second-number)))))
+                         (bool-val (> first-number second-number)))))
 
 
         (num-lt-test (term1 term2)
@@ -120,8 +116,7 @@
                            (second-val (value-of term2 env)))
                        (let ((first-number (expval->num first-val))
                              (second-number (expval->num second-val)))
-                         (bool-val
-                          (< first-number second-number)))))
+                         (bool-val (< first-number second-number)))))
 
 
         (cons-exp (head tail)
@@ -170,6 +165,19 @@
 
         )))
 
+      ;; I have no clue what i'm doing atm
+
+  (define (cond-value conds conseqs evaluator env) ; rip this solution is too hacky i dont think its the one intended
+    ; I will make the assumption that the two lists
+    ; have the same length, TODO: Is this something you want to keep?
+    (if (null? conds)
+        (eopl:error "Cond expression empty")
+        (let ((head-cond-exp (car conds))
+              (head-consequent-exp (car conseqs)))
+          (let ((head-val (evaluator head-cond-exp env)))
+            (if (expval->bool head-val)
+                (evaluator head-consequent-exp env)
+                (cond-value (cdr conds) (cdr conseqs) evaluator env))))))
 
   )
 

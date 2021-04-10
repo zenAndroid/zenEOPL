@@ -26,7 +26,9 @@
       (expression ("if" expression "then" expression "else" expression) if-exp)
       (expression (identifier) var-exp)
       (expression ("let" identifier "=" expression "in" expression) let-exp)
-
+      ; New let
+      ; (expression ("let" (arbno identifier "=" expression) "in" expression) let-exp)
+      
       ;; My additions
 
       ;; Arithmetic
