@@ -103,7 +103,7 @@
                                    (second-number (expval->num second-val)))
                                (bool-val
                                 (equal? first-number second-number)))))
-
+        ; \alpha
         (num-gt-test (term1 term2)
                      (let ((first-val (value-of term1 env))
                            (second-val (value-of term2 env)))

@@ -89,7 +89,7 @@
 
   (newline)
 
-  (display (run "car(cons(cons(5,6),6))"))
+  (pretty-display (run "car(cons(cons(5,6),6))"))
 
   (newline)
 
