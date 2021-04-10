@@ -57,6 +57,7 @@
                   (if (expval->bool val1)
                       (value-of exp2 env)
                       (value-of exp3 env))))
+        
 
         ;\commentbox{\ma{\theletspecsplit}}
         (let-exp (var exp1 body)       
@@ -104,6 +105,7 @@
                                (bool-val
                                 (equal? first-number second-number)))))
         
+        
         (num-gt-test (term1 term2)
                      (let ((first-val (value-of term1 env))
                            (second-val (value-of term2 env)))
@@ -112,6 +114,7 @@
                          (bool-val
                           (> first-number second-number)))))
 
+
         (num-lt-test (term1 term2)
                      (let ((first-val (value-of term1 env))
                            (second-val (value-of term2 env)))
@@ -119,6 +122,7 @@
                              (second-number (expval->num second-val)))
                          (bool-val
                           (< first-number second-number)))))
+
 
         (cons-exp (head tail)
                   (let ((head-val (value-of head env))

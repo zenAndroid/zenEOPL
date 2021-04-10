@@ -97,7 +97,7 @@
 
   (display (run "car(list(1,2,let x = -(10,7) in plus(x,3)))")) (newline)
 
-  (display (run "cond zero?(5) ==> 5 greater?(-(11,11),9) ==> 4 end")) (newline)
+  (display (run "cond zero?(5) ==> 5 greater?(-(11,11),minus(9)) ==> 4 end")) (newline)
   
   ;; That ... worked????
   ;; first time ????
