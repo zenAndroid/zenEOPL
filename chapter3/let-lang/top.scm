@@ -125,6 +125,8 @@
 
   (run "plus(print(66),print(8))")
 
+  (run "let x = 1 in list(x)") ; This also doesn't print anything, but it passes the tests :/
+  ; Eh, annoying but oh well ...
   
   
   )

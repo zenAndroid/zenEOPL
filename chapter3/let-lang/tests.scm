@@ -70,6 +70,8 @@
       (check-numerical-equality-nested "equal?(plus(1,6),7)" #t)
 
       (check-numerical-equality-nested "equal?(plus(1,6),5)" #f)
+
+      (check-arbitrary-let "let x = plus(1,2) y = plus(2,3) in list(x,y)" 44)
       
       ))
   )
