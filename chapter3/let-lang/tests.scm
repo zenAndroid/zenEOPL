@@ -74,5 +74,7 @@
       (check-arbitrary-let "let x = 30 in let x = -(x,1) y = -(x,2) in -(x,y)" 1)
 
       (check-let-star "let x = 30 in let* x = -(x,1) y = -(x,2) in -(x,y)" 2)
+
+      (test-unpack "let u = 7 in unpack x y = cons(u,cons(3,emptylist)) in -(x,y)" 4)
       ))
   )

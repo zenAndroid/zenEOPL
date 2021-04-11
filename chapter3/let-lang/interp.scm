@@ -169,6 +169,18 @@
         (let-star-exp (vars exps body)
                       (let-star-handler vars exps body env))
 
+        (unpack-exp (vars expression-to-be-unpacked body-exp) ;; This worked first time too ...
+                    (define (internal-handler vars vals env)  ;; I'm going to sleep.
+                      (if (or (null? vars) (null? vals))
+                          (value-of body-exp env)
+                          (internal-handler (cdr vars)
+                                            (expval->pair-cdr vals)
+                                            (extend-env (car vars) (expval->pair-car vals) env))))
+                    (let ((values-to-unpack (value-of expression-to-be-unpacked env)))
+                      (internal-handler vars values-to-unpack env)))
+                      
+                      
+
         )))
 
       ;; I have no clue what i'm doing atm

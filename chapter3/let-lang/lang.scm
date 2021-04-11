@@ -28,6 +28,8 @@
       ; (expression ("let" identifier "=" expression "in" expression) let-exp)
       ; New let
       (expression ("let" (arbno identifier "=" expression) "in" expression) let-exp)
+      
+      ; Let-star
       (expression ("let*" (arbno identifier "=" expression) "in" expression) let-star-exp)
       
       ;; My additions
@@ -66,6 +68,12 @@
       ;; Print operation
 
       (expression ("print" "(" expression ")") print-exp)
+
+      ;; Unpack
+
+      ;; Oof, this is interesting...
+      
+      (expression ("unpack" (arbno identifier) "=" expression "in" expression) unpack-exp)
       
       ))
   
