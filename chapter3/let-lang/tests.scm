@@ -70,8 +70,9 @@
       (check-numerical-equality-nested "equal?(plus(1,6),7)" #t)
 
       (check-numerical-equality-nested "equal?(plus(1,6),5)" #f)
-
-      (check-arbitrary-let "let x = plus(1,2) y = plus(2,3) in list(x,y)" 44)
       
+      (check-arbitrary-let "let x = 30 in let x = -(x,1) y = -(x,2) in -(x,y)" 1)
+
+      (check-let-star "let x = 30 in let* x = -(x,1) y = -(x,2) in -(x,y)" 2)
       ))
   )

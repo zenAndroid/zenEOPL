@@ -28,6 +28,7 @@
       ; (expression ("let" identifier "=" expression "in" expression) let-exp)
       ; New let
       (expression ("let" (arbno identifier "=" expression) "in" expression) let-exp)
+      (expression ("let*" (arbno identifier "=" expression) "in" expression) let-star-exp)
       
       ;; My additions
 
