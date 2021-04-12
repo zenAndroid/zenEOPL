@@ -65,22 +65,36 @@
             (value-of body
               (extend-env var val1 env))))
         
-        (proc-exp (var body)
-          (proc-val (procedure var body env)))
+        (proc-exp (var-list body)
+          (proc-val (procedure var-list body env)))
 
-        (call-exp (rator rand)
+        (call-exp (rator rand-list)
           (let ((proc (expval->proc (value-of rator env)))
-                (arg (value-of rand env)))
-            (apply-procedure proc arg)))
+                (arg-list (map (lambda(exp) (value-of exp env)) rand-list)))
+            (apply-procedure proc arg-list)))
+
+        (letproc-exp (proc-name var-list-ident proc-body let-body)
+                     ;; letproc foo(arg) = let x = 5 in -(x,arg)
+                     ;; We expect the result of this to equal
+                     ;; he evaluation of the let body in the context of an environement
+                     ;; where the proc-name is bound to the (procedure var-ident proc-body old-env)
+                     ;; So we will do just that :thinking:
+                     ;; 1 - Extend the old-env by bouonding proc-name to
+                     ;; (proc-val (procedure var-ident proc-body env))
+                     ;; 2 - evaluate the body of the let in this environement
+                     (let ((proc-representation (proc-val (procedure var-list-ident proc-body env))))
+                       (let ((new-env (extend-env proc-name proc-representation env)))
+                         (value-of let-body new-env))))
+                           
 
         )))
 
   ;; apply-procedure : Proc * ExpVal -> ExpVal
   ;; Page: 79
   (define apply-procedure
-    (lambda (proc1 val)
+    (lambda (proc1 value-list)
       (cases proc proc1
-        (procedure (var body saved-env)
-          (value-of body (extend-env var val saved-env))))))
+        (procedure (var-list body saved-env)
+          (value-of body (extend-env* var-list value-list saved-env))))))
 
   )

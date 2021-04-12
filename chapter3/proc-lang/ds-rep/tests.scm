@@ -73,5 +73,8 @@ in let
     t4m = proc (f) proc(x) if zero?(x) then 0 else -((f -(x,1)),-4)
 in let times4 = (fix t4m)
    in (times4 3)" 12)
+      (letproc "letproc foo(arg) = let x = 5 in -(x,arg) in (foo 3)" 2)
+
+      (exercice-currying "let f = proc (x) proc (y) -(x,-(0,y)) in ((f 3) 4)" 7)
       ))
   )

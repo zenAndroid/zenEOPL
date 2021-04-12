@@ -50,11 +50,19 @@
 
   ;; proc? : SchemeVal -> Bool
   ;; procedure : Var * Exp * Env -> Proc
+;  (define-datatype proc proc?
+;    (procedure
+;      (var symbol?)
+;      (body expression?)
+;      (env environment?)))
+
+  ;; ^ Old thing, trying out a new definition to allow for multiple arguments
+
   (define-datatype proc proc?
     (procedure
-      (var symbol?)
-      (body expression?)
-      (env environment?)))
+     (var-list (list-of symbol?))
+     (body expression?)
+     (env environment?)))
 
 ;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
 

@@ -127,8 +127,11 @@
 
   (run "let x = 1 in list(x)") ; This also doesn't print anything, but it passes the tests :/
   ; Eh, annoying but oh well ...
-  
-  
+
+  (run "let u = 7
+      in unpack x y = cons(u, cons(3,emptylist))
+      in -(x,y)"); This also doesn't print anything, but it passes the tests :/
+  ; Eh, annoying but oh well ... EDIT: REALLY ANNOYING >:(
   )
 
 
