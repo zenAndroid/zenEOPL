@@ -62,8 +62,7 @@
 
 
       (nested-procs "((proc (x) proc (y) -(x,y)  5) 6)" -1)
-      (nested-procs2 "let f = proc(x) proc (y) -(x,y) in ((f -(10,5)) 6)"
-        -1)
+      (nested-procs2 "let f = proc(x) proc (y) -(x,y) in ((f -(10,5)) 6)"  -1)
       
       (y-combinator-1 "
 let fix =  proc (f)
@@ -76,5 +75,62 @@ in let times4 = (fix t4m)
       (letproc "letproc foo(arg) = let x = 5 in -(x,arg) in (foo 3)" 2)
 
       (exercice-currying "let f = proc (x) proc (y) -(x,-(0,y)) in ((f 3) 4)" 7)
+
+      (higher-order-test "
+let makemult = proc (maker)
+                proc (x)
+                  if zero?(x)
+                  then  0
+                  else -(((maker maker) -(x,1)), -4)
+in
+    let times4 = proc (x) ((makemult makemult) x)
+    in (times4 3)" 12)
+      (higher-order-test "
+let times = proc (n)
+               proc (maker)
+                proc (x)
+                  if zero?(x)
+                  then  0
+                  else -(((maker maker) -(x,1)), -(0,n))
+in
+    let timez = proc (n) proc (x) (((times n) (times n)) x)
+    in let fact = proc (foo)
+                   proc (x)
+                    if zero?(x)
+                    then 1
+                    else ((timez x) ((foo foo) -(x,1)))
+       in ((fact fact) 5)" 120) ;; Yey, this works
+
+      (odd-even-test
+       "
+let one? = proc (n) zero?(-(n,1))
+in
+let oddP = proc (odd?, even?)
+            proc(n)
+             if zero?(n)
+             then zero?(1)
+             else if (one? n)
+                  then zero?(0)
+                  else if ((even? odd? even?) -(n,1))
+                       then zero?(0)
+                       else zero?(1)
+in
+let evenP = proc (odd?, even?)
+             proc(n)
+              if zero?(n)
+              then zero?(0)
+              else if (one? n)
+                   then zero?(1)
+                   else if ((odd? odd? even?) -(n,1))
+                        then zero?(0)
+                        else zero?(1)
+in
+let odd? = (oddP oddP evenP)
+in
+let even? = (evenP oddP evenP)
+in
+(odd? 15)" #t) ; Yey, this works too, although at first i made a silly mistake
+               ; (not respecting the grammar in the multiple arguments declaration [forgot they were comma-separated]
+               ; and forgot the call expression had no parens, a bit of a brainlet move, that ... 
       ))
   )
