@@ -82,10 +82,13 @@
                      ;; 1 - Extend the old-env by bouonding proc-name to
                      ;; (proc-val (procedure var-ident proc-body env))
                      ;; 2 - evaluate the body of the let in this environement
-                     
-                       (let ((proc-representation (proc-val (procedure var-list-ident proc-body env))))
-                         (let ((new-env (extend-env proc-name proc-representation env)))
-                           (value-of let-body new-env))))
+
+                     ;; Removed the lets, jst to see how it looks, and i notice its not bad actually
+                     ;; can still understand the code fine
+                     (value-of let-body
+                               (extend-env proc-name
+                                           (proc-val (procedure var-list-ident proc-body env))
+                                           env)))
                            
 
         )))
