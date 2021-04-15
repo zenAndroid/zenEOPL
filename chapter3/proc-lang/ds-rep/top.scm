@@ -57,7 +57,7 @@
  
   (run-all)
 
-  (run "(traceproc(a,b) -(a,b) 100 50)")
+  ;; (run "(traceproc(a,b) -(a,b) 100 50)")
   
   )
 

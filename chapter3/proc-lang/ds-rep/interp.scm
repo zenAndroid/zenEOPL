@@ -77,7 +77,7 @@
         (call-exp (rator rand-list)
                   (let ((proc (expval->proc (value-of rator env)))
                         (arg-list (map (lambda(exp) (value-of exp env)) rand-list)))
-                    (apply-procedure proc arg-list)))
+                    (apply-procedure proc arg-list env)))
 
         (letproc-exp (proc-name var-list-ident proc-body let-body)
 
@@ -104,14 +104,14 @@
   ;; apply-procedure : Proc * ExpVal -> ExpVal
   ;; Page: 79
   (define apply-procedure
-    (lambda (proc1 value-list)
+    (lambda (proc1 value-list env)
       (cases proc proc1
         (procedure (var-list body saved-env traced? dynamically-scoped?)
                    (when traced? (eopl:printf "Entry intro traced proc.\n")) ;; Well, it turns out Racket removed one-armed ifs and replaced them with when/unless.
                    ;; ... shrug
                    (let ((value (value-of body (if (not dynamically-scoped?)
                                                    (extend-env* var-list value-list saved-env)
-                                                   (extend-env* var-list value-list (empty-env))))))
+                                                   (extend-env* var-list value-list env)))))
                      (when traced? (eopl:printf "Exit out of traced proc.\n"))
                      value)))))
   )
