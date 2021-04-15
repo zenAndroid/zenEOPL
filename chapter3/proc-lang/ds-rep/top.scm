@@ -56,6 +56,8 @@
           (else (eopl:error 'run-one "no such test: ~s" test-name))))))
  
   (run-all)
+
+  (run "(traceproc(a,b) -(a,b) 100 50)")
   
   )
 

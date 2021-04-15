@@ -62,8 +62,8 @@
     (procedure
      (var-list (list-of symbol?))
      (body expression?)
-     (env environment?)))
-
+     (env environment?)
+     (traced boolean?)))
 ;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
 
 ;; example of a data type built without define-datatype

@@ -32,7 +32,8 @@
 
       ;; Multiple possible formal/actual parameters.
       
-      (expression ( "proc" "(" (separated-list identifier ",") ")" expression) proc-exp)
+      (expression ("proc" "(" (separated-list identifier ",") ")" expression) proc-exp)
+      (expression ("traceproc" "(" (separated-list identifier ",") ")" expression) traced-proc-exp)
       (expression ("(" expression (arbno expression) ")") call-exp)
       ))
 
