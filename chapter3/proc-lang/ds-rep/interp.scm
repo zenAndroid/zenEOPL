@@ -66,10 +66,13 @@
                              (extend-env var val1 env))))
         
         (proc-exp (var-list body)
-                  (proc-val (procedure var-list body env #f)))
+                  (proc-val (procedure var-list body env #f #f))) ; not-traced not-dynamically-scoped
 
         (traced-proc-exp (var-list body)
-                         (proc-val (procedure var-list body env #t)))
+                         (proc-val (procedure var-list body env #t #f))) ; yes-traced not-dynamically-scoped
+        
+        (dyn-proc-exp (var-list body)
+                      (proc-val (procedure var-list body (empty-env) #f #t))) ;; Not sure about this, not-traced yes-dynamically-scoped
 
         (call-exp (rator rand-list)
                   (let ((proc (expval->proc (value-of rator env)))
@@ -77,6 +80,7 @@
                     (apply-procedure proc arg-list)))
 
         (letproc-exp (proc-name var-list-ident proc-body let-body)
+
                      ;; letproc foo(arg) = let x = 5 in -(x,arg)
                      ;; We expect the result of this to equal
                      ;; he evaluation of the let body in the context of an environement
@@ -88,9 +92,10 @@
 
                      ;; Removed the lets, jst to see how it looks, and i notice its not bad actually
                      ;; can still understand the code fine
+
                      (value-of let-body
                                (extend-env proc-name
-                                           (proc-val (procedure var-list-ident proc-body env #f)) ;;By default, let procs arent traced, so ...
+                                           (proc-val (procedure var-list-ident proc-body env #f #f)) ;; By default, let procs arent traced, so ... nor are they dynamically-scoped
                                            env)))
                            
 
@@ -101,10 +106,12 @@
   (define apply-procedure
     (lambda (proc1 value-list)
       (cases proc proc1
-        (procedure (var-list body saved-env traced?)
+        (procedure (var-list body saved-env traced? dynamically-scoped?)
                    (when traced? (eopl:printf "Entry intro traced proc.\n")) ;; Well, it turns out Racket removed one-armed ifs and replaced them with when/unless.
                    ;; ... shrug
-                   (let ((value (value-of body (extend-env* var-list value-list saved-env))))
+                   (let ((value (value-of body (if (not dynamically-scoped?)
+                                                   (extend-env* var-list value-list saved-env)
+                                                   (extend-env* var-list value-list (empty-env))))))
                      (when traced? (eopl:printf "Exit out of traced proc.\n"))
                      value)))))
   )

@@ -132,5 +132,19 @@ in
 (odd? 15)" #t) ; Yey, this works too, although at first i made a silly mistake
                ; (not respecting the grammar in the multiple arguments declaration [forgot they were comma-separated]
                ; and forgot the call expression had no parens, a bit of a brainlet move, that ... 
+      (dynamic-scope
+       "
+let a = 3
+in
+let p = proc (x) -(x,a)
+in
+let a = 5
+in
+ -(a,(p 2))" 6)
+
       ))
+
+  
+
+  
   )

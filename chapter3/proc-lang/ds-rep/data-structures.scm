@@ -63,7 +63,9 @@
      (var-list (list-of symbol?))
      (body expression?)
      (env environment?)
-     (traced boolean?)))
+     (traced boolean?)
+     (dynamically-scoped boolean?))) ;; Thonk ... dunno if this'll work or not ...
+    
 ;;;;;;;;;;;;;;;; environment structures ;;;;;;;;;;;;;;;;
 
 ;; example of a data type built without define-datatype

@@ -33,6 +33,10 @@
       ;; Multiple possible formal/actual parameters.
       
       (expression ("proc" "(" (separated-list identifier ",") ")" expression) proc-exp)
+
+      (expression ("dynproc" "(" (separated-list identifier ",") ")" expression) dyn-proc-exp) ;; adding new sy ntax for dynamiclly bound procedure
+                                                                                               ;; (As opposed to changing all of the business logic)
+
       (expression ("traceproc" "(" (separated-list identifier ",") ")" expression) traced-proc-exp)
       (expression ("(" expression (arbno expression) ")") call-exp)
       ))
