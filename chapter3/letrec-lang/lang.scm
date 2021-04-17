@@ -53,6 +53,12 @@
           identifier "(" (separated-list identifier ",") ")" "=" expression
            "in" expression)
         letrec-exp)
+
+      (expression
+        ("mult-letrec"
+          (arbno identifier "(" identifier ")" "=" expression)
+           "in" expression)
+        mult-proc-letrec-exp)
       
       ))
   
