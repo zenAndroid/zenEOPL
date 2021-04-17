@@ -35,45 +35,52 @@
 
         ;\commentbox{\diffspec}
         (diff-exp (exp1 exp2)
-          (let ((val1 (value-of exp1 env))
-                (val2 (value-of exp2 env)))
-            (let ((num1 (expval->num val1))
-                  (num2 (expval->num val2)))
-              (num-val
-                (- num1 num2)))))
+                  (let ((val1 (value-of exp1 env))
+                        (val2 (value-of exp2 env)))
+                    (let ((num1 (expval->num val1))
+                          (num2 (expval->num val2)))
+                      (num-val
+                       (- num1 num2)))))
 
         ;\commentbox{\zerotestspec}
         (zero?-exp (exp1)
-          (let ((val1 (value-of exp1 env)))
-            (let ((num1 (expval->num val1)))
-              (if (zero? num1)
-                (bool-val #t)
-                (bool-val #f)))))
+                   (let ((val1 (value-of exp1 env)))
+                     (let ((num1 (expval->num val1)))
+                       (if (zero? num1)
+                           (bool-val #t)
+                           (bool-val #f)))))
               
         ;\commentbox{\ma{\theifspec}}
         (if-exp (exp1 exp2 exp3)
-          (let ((val1 (value-of exp1 env)))
-            (if (expval->bool val1)
-              (value-of exp2 env)
-              (value-of exp3 env))))
+                (let ((val1 (value-of exp1 env)))
+                  (if (expval->bool val1)
+                      (value-of exp2 env)
+                      (value-of exp3 env))))
 
         ;\commentbox{\ma{\theletspecsplit}}
         (let-exp (var exp1 body)       
-          (let ((val1 (value-of exp1 env)))
-            (value-of body
-              (extend-env var val1 env))))
+                 (let ((val1 (value-of exp1 env)))
+                   (value-of body
+                             (extend-env var val1 env))))
         
         (proc-exp (var-list body)
-          (proc-val (procedure var-list body env)))
+                  (proc-val (procedure var-list body env)))
 
         (call-exp (rator rand-list)
-          (let ((proc (expval->proc (value-of rator env)))
-                (arg-list (map (lambda(exp) (value-of exp env)) rand-list)))
-            (apply-procedure proc arg-list))) ;; Not passing the environement since there are no dynamic binding shenanigans here.
+                  (let ((proc (expval->proc (value-of rator env)))
+                        (arg-list (map (lambda(exp) (value-of exp env)) rand-list)))
+                    (apply-procedure proc arg-list))) ;; Not passing the environement since there are no dynamic binding shenanigans here.
 
         (letrec-exp (p-name b-vars p-body letrec-body)
-          (value-of letrec-body
-            (extend-env-rec p-name b-vars p-body env)))
+                    (value-of letrec-body
+                              (extend-env-rec p-name b-vars p-body env)))
+
+        (mult-proc-letrec-exp (procs-names one-var-per-proc proc-bodies letrec-body)
+                              ;; The (value-of the letrec-body)
+                              ;; in the environment containing all the procs
+                              ;; ... :thinking
+                              (value-of letrec-body
+                                        (procs-names one-var-per-proc proc-bodies))) ;; This line is total hogwash, just to get warning off my back
 
         )))
 
