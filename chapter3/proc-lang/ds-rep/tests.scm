@@ -140,7 +140,34 @@ let p = dynproc (x) -(x,a)
 in
 let a = 5
 in
- -(a,(p 2))" 8)
+-(a,(p 2))" 8)
+
+      (dynamic-exercice "
+let a = 3
+in
+let p = dynproc (z) a
+in
+let f = dynproc (a) (p 0)
+in
+let a = 5
+in (f 2)" 5)
+
+      ;test: dynamic-exercice
+      ;
+      ;let a = 3
+      ;in
+      ;let p = dynproc (z) a
+      ;in
+      ;let f = dynproc (a) (p 0)
+      ;in
+      ;let a = 5
+      ;in (f 2)
+      ;correct outcome: 5
+      ;actual outcome:  #(struct:num-val 2)
+      ;incorrect
+
+      ; ...
+      ; Interesting
 
       ))
 

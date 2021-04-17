@@ -63,27 +63,27 @@
             (value-of body
               (extend-env var val1 env))))
         
-        (proc-exp (var body)
-          (proc-val (procedure var body env)))
+        (proc-exp (var-list body)
+          (proc-val (procedure var-list body env)))
 
-        (call-exp (rator rand)
+        (call-exp (rator rand-list)
           (let ((proc (expval->proc (value-of rator env)))
-                (arg (value-of rand env)))
-            (apply-procedure proc arg)))
+                (arg-list (map (lambda(exp) (value-of exp env)) rand-list)))
+            (apply-procedure proc arg-list))) ;; Not passing the environement since there are no dynamic binding shenanigans here.
 
-        (letrec-exp (p-name b-var p-body letrec-body)
+        (letrec-exp (p-name b-vars p-body letrec-body)
           (value-of letrec-body
-            (extend-env-rec p-name b-var p-body env)))
+            (extend-env-rec p-name b-vars p-body env)))
 
         )))
 
   ;; apply-procedure : Proc * ExpVal -> ExpVal
 
   (define apply-procedure
-    (lambda (proc1 arg)
+    (lambda (proc1 arg-list)
       (cases proc proc1
-        (procedure (var body saved-env)
-          (value-of body (extend-env var arg saved-env))))))
+        (procedure (var-list body saved-env)
+          (value-of body (extend-env* var-list arg-list saved-env))))))
   
   )
   

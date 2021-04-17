@@ -5,7 +5,7 @@
 
   (require "data-structures.scm")
 
-  (provide init-env empty-env extend-env apply-env)
+  (provide init-env empty-env extend-env extend-env* apply-env)
 
 ;;;;;;;;;;;;;;;; initial environment ;;;;;;;;;;;;;;;;
   
@@ -26,6 +26,16 @@
          'x (num-val 10)
          (empty-env))))))
 
+  
+  (define (extend-env* vars vals old-env)
+    (if (null? vars) ; Again assumaing the vars and the vals are of equal length ... TODO: make this robust plz
+        old-env ; If no vars are here, we just return the old environment
+        (let ((var (car vars))
+              (val (car vals))
+              (rest-vars (cdr vars))
+              (rest-vals (cdr vals)))
+          (let ((extended-env (extend-env var val old-env)))
+            (extend-env* rest-vars rest-vals extended-env)))))
 ;;;;;;;;;;;;;;;; environment constructors and observers ;;;;;;;;;;;;;;;;
 
   ;; Page: 86
@@ -38,9 +48,9 @@
 	  (if (eqv? search-sym var)
 	    val
 	    (apply-env saved-env search-sym)))
-        (extend-env-rec (p-name b-var p-body saved-env)
+        (extend-env-rec (p-name b-vars p-body saved-env)
           (if (eqv? search-sym p-name)
-            (proc-val (procedure b-var p-body env))          
+            (proc-val (procedure b-vars p-body env))          
             (apply-env saved-env search-sym))))))
     
   )

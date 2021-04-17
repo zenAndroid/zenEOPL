@@ -52,7 +52,7 @@
   ;; procedure : Var * Exp * Env -> Proc
   (define-datatype proc proc?
     (procedure
-      (bvar symbol?)
+      (bvar (list-of symbol?))
       (body expression?)
       (env environment?)))
 
@@ -65,7 +65,7 @@
       (saved-env environment?))
     (extend-env-rec
       (id symbol?)
-      (bvar symbol?)
+      (bvar (list-of symbol?))
       (body expression?)
       (saved-env environment?)))
 
