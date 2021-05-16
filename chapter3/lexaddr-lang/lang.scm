@@ -25,8 +25,8 @@
 
       (expression (number) const-exp)
       (expression
-        ("-" "(" expression "," expression ")")
-        diff-exp)
+       ("-" "(" expression "," expression ")")
+       diff-exp)
       
       (expression
        ("zero?" "(" expression ")")
@@ -51,12 +51,15 @@
        call-exp)
 
       (expression ("%nameless-var" number) nameless-var-exp)
+      
+      (expression ("cond" (arbno expression "==>" expression) "end") cond-exp)
+
       (expression
-        ("%let" expression "in" expression)
-        nameless-let-exp)
+       ("%let" expression "in" expression)
+       nameless-let-exp)
       (expression
-        ("%lexproc" expression)
-        nameless-proc-exp)
+       ("%lexproc" expression)
+       nameless-proc-exp)
       
       ))
 

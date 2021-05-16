@@ -4,7 +4,7 @@
   (provide init-nameless-env empty-nameless-env extend-nameless-env
            apply-nameless-env)
 
-;;;;;;;;;;;;;;;; initial environment ;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;; initial environment ;;;;;;;;;;;;;;;;
   
   ;; init-env : () -> Nameless-env
 

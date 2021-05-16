@@ -24,8 +24,8 @@
   (define run
     (lambda (string)
       (value-of-translation
-	(translation-of-program
-	  (scan&parse string)))))
+       (translation-of-program
+        (scan&parse string)))))
   
   ;; run-all : () -> Unspecified
 
@@ -62,8 +62,16 @@
            => (lambda (test)
                 (run (cadr test))))
           (else (eopl:error 'run-one "no such test: ~s" test-name))))))
+
+  (pretty-print (scan&parse "cond zero?(9) ==> 5 zero?(0) ==> 4 end")) (newline)
+  (pretty-print (translation-of-program
+                 (scan&parse "cond zero?(9) ==> 5 zero?(0) ==> 4 end"))) (newline)
+  (pretty-print (value-of-translation
+                 (translation-of-program
+                  (scan&parse "cond zero?(9) ==> 5 zero?(0) ==> 4 end")))) (newline)
+  
  
-  ;; (run-all)
+  ; (run-all)
   
   )
 

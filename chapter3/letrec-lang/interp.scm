@@ -12,14 +12,14 @@
 
   (provide value-of-program value-of)
 
-;;;;;;;;;;;;;;;; the interpreter ;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;; the interpreter ;;;;;;;;;;;;;;;;
 
   ;; value-of-program : Program -> ExpVal
   (define value-of-program 
     (lambda (pgm)
       (cases program pgm
         (a-program (exp1)
-          (value-of exp1 (init-env))))))
+                   (value-of exp1 (init-env))))))
 
   ;; value-of : Exp * Env -> ExpVal
   ;; Page: 83
@@ -79,8 +79,11 @@
                               ;; The (value-of the letrec-body)
                               ;; in the environment containing all the procs
                               ;; ... :thinking
-                              (value-of letrec-body
-                                        (procs-names one-var-per-proc proc-bodies))) ;; This line is total hogwash, just to get warning off my back
+                              (let ((extended-env (extend-env-rec* procs-names one-var-per-proc proc-bodies env)))
+                                (begin
+                                  (pretty-print extended-env) (newline))
+                                (value-of letrec-body
+                                          extended-env)))
 
         )))
 
@@ -90,7 +93,9 @@
     (lambda (proc1 arg-list)
       (cases proc proc1
         (procedure (var-list body saved-env)
-          (value-of body (extend-env* var-list arg-list saved-env))))))
+                   (value-of body (extend-env* var-list arg-list saved-env))))))
+
+  (trace apply-procedure)
   
   )
   

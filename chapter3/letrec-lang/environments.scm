@@ -5,7 +5,7 @@
 
   (require "data-structures.scm")
 
-  (provide init-env empty-env extend-env extend-env* apply-env)
+  (provide init-env empty-env extend-env extend-env* apply-env extend-env-rec*)
 
 ;;;;;;;;;;;;;;;; initial environment ;;;;;;;;;;;;;;;;
   
@@ -36,7 +36,19 @@
               (rest-vals (cdr vals)))
           (let ((extended-env (extend-env var val old-env)))
             (extend-env* rest-vars rest-vals extended-env)))))
-;;;;;;;;;;;;;;;; environment constructors and observers ;;;;;;;;;;;;;;;;
+
+  (define (extend-env-rec* procs-names one-var-per-proc proc-bodies env)
+    "extend-env* but also binds procedures names"
+    (if (null? procs-names)
+        env ;; Just won't take care of all the other funky edge cases, TODO: maybe fix
+        (extend-env-rec* (cdr procs-names) (cdr one-var-per-proc) (cdr proc-bodies)
+                         (extend-env-rec
+                          (car procs-names)
+                          (list (car one-var-per-proc))
+                          (car proc-bodies)
+                          env))))
+  
+  ;;;;;;;;;;;;;;;; environment constructors and observers ;;;;;;;;;;;;;;;;
 
   ;; Page: 86
   (define apply-env
@@ -52,5 +64,8 @@
           (if (eqv? search-sym p-name)
             (proc-val (procedure b-vars p-body env))          
             (apply-env saved-env search-sym))))))
+
+  (trace apply-env)
+  (trace extend-env-rec*)
     
   )

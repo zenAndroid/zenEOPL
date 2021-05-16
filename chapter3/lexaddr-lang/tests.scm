@@ -38,11 +38,11 @@
       (if-eval-test-true "if zero?(-(11,11)) then 3 else 4" 3)
       (if-eval-test-false "if zero?(-(11, 12)) then 3 else 4" 4)
       
-;      these aren't translatable. Exercise: make them translatable by
-;      providing a binding for foo.
-;       ;; and make sure the other arm doesn't get evaluated.
-;       (if-eval-test-true-2 "if zero?(-(11, 11)) then 3 else foo" 3)
-;       (if-eval-test-false-2 "if zero?(-(11,12)) then foo else 4" 4)
+      ;      these aren't translatable. Exercise: make them translatable by
+      ;      providing a binding for foo.
+      ;       ;; and make sure the other arm doesn't get evaluated.
+      ;       (if-eval-test-true-2 "if zero?(-(11, 11)) then 3 else foo" 3)
+      ;       (if-eval-test-false-2 "if zero?(-(11,12)) then foo else 4" 4)
 
       ;; simple let
       (simple-let-1 "let x = 3 in x" 3)
@@ -64,7 +64,7 @@
 
       (nested-procs "((proc (x) proc (y) -(x,y)  5) 6)" -1)
       (nested-procs2 "let f = proc(x) proc (y) -(x,y) in ((f -(10,5)) 6)"
-        -1)
+                     -1)
       
       (y-combinator-1 "
 let fix =  proc (f)
